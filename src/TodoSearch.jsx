@@ -1,16 +1,14 @@
 import React from 'react';
 import './TodoSearch.css';
 
-function TodoSearch() {
+function TodoSearch({searchValue, setsearchValue}) {
 
-    // const [state, setState] = React.useState();
-    const [searchValue, setsearchValue] = React.useState("");
+    
 
     function handleChange(event) {
         setsearchValue(event.target.value);
     }
 
-    console.log("Los usuarios buscan 'todos' de ", searchValue)
 
     return (
         <input
@@ -18,7 +16,7 @@ function TodoSearch() {
             className="TodoSearch"
             value={searchValue}
             onChange={handleChange}
-            
+
         />
     );
 }

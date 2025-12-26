@@ -1,3 +1,4 @@
+import React from 'react';
 import { TodoCounter } from './TodoCounter';
 import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
@@ -21,13 +22,27 @@ const defautlTodos = [
     text: "Mercar",
     completed: false
   },
+  {
+    text: "Revisar el correo",
+    completed: true
+  },
 ]
 
 function App() {
+  
+  const [todos, setTodos] = React.useState(defautlTodos);
+  const [searchValue, setsearchValue] = React.useState("");
+
+  const completedTodos = todos.filter((todo) => !!todo.completed).length;
+  const totalTodos = todos.length;
+
+  console.log("completados==", completedTodos)
+  console.log("Los usuarios buscan 'todos' de ", searchValue)  
+
   return (
     <>
-      <TodoCounter completed={16} total={25} />
-      <TodoSearch />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
+      <TodoSearch searchValue={searchValue} setsearchValue={setsearchValue} />
 
       <TodoList>
         {defautlTodos.map(todoElement => (
