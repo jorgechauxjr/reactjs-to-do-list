@@ -1,6 +1,6 @@
 import './CreateTodoButton.css'
 
-function CreateTodoButon() {
+function CreateTodoButton() {
     function handleClick(event) {
         console.log("DISTE CLICK!")
         console.log("====> evento ", event)
@@ -15,7 +15,7 @@ function CreateTodoButon() {
     );
 }
 
-export { CreateTodoButon };
+export { CreateTodoButton };
 
 /*
 
