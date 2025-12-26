@@ -23,7 +23,7 @@ const defautlTodos = [
     completed: false
   },
   {
-    text: "Revisar el correo",
+    text: "Orar por todos",
     completed: true
   },
 ]
@@ -33,11 +33,21 @@ function App() {
   const [todos, setTodos] = React.useState(defautlTodos);
   const [searchValue, setsearchValue] = React.useState("");
 
+  // estado derivado
   const completedTodos = todos.filter((todo) => !!todo.completed).length;
   const totalTodos = todos.length;
 
   console.log("completados==", completedTodos)
-  console.log("Los usuarios buscan 'todos' de ", searchValue)  
+  console.log("Los usuarios buscan 'todos' de ", searchValue)
+
+  const searchedTodos = todos.filter(
+    (todo) => {
+      const todoText = todo.text.toLocaleLowerCase();
+      const searchText = searchValue.toLocaleLowerCase();
+      return todoText.includes(searchText);
+  })
+  console.log("BUSQUEDA === ", searchedTodos);
+  
 
   return (
     <>
@@ -45,7 +55,7 @@ function App() {
       <TodoSearch searchValue={searchValue} setsearchValue={setsearchValue} />
 
       <TodoList>
-        {defautlTodos.map(todoElement => (
+        {searchedTodos.map(todoElement => (
           <TodoItem
             key={todoElement.text}
             text={todoElement.text}
