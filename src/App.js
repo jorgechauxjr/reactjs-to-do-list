@@ -57,6 +57,15 @@ function App() {
     setTodos(newTodos);
   };
 
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex(
+      (todo) => todo.text == text
+    );
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  }
+
 
   return (
     <>
@@ -76,7 +85,7 @@ function App() {
             text={todo.text}
             completed={todo.completed}
             done={() => completeTodo(todo.text)}
-            
+            delete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>

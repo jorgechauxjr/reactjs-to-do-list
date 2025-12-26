@@ -14,6 +14,7 @@ function TodoItem(props) {
             </p>
             <span
                 className="Icon Icon-delete"
+                onClick={props.delete}
             >
                 X
             </span>
