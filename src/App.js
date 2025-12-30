@@ -5,7 +5,7 @@ import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
 
-/* const defautlTodos = [
+/* const defaultTodos = [
   {
     text: "Hacer ejercicio",
     completed: false
@@ -26,9 +26,8 @@ import { CreateTodoButton } from './CreateTodoButton';
     text: "Orar por todos",
     completed: true
   },
-]
-localStorage.setItem('TODOS_V1', defautlTodos);
-
+] 
+localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));  
 */
 
 // localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
@@ -36,14 +35,15 @@ localStorage.setItem('TODOS_V1', defautlTodos);
 
 function App() {
   const localStorageTodos = localStorage.getItem('TODOS_V1');
+
   let parsedTodos;
+
   if (!localStorageTodos) {
     localStorage.setItem('TODOS_V1', JSON.stringify([]));
     parsedTodos = [];
   } else {
     parsedTodos = JSON.parse(localStorageTodos);
   }
-
 
   const [todos, setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState("");
@@ -55,13 +55,21 @@ function App() {
   console.log("completados==", completedTodos)
   console.log("Los usuarios buscan 'todos' de ", searchValue)
 
+
   const searchedTodos = todos.filter(
     (todo) => {
-      const todoText = todo.text.toLocaleLowerCase();
-      const searchText = searchValue.toLocaleLowerCase();
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
       return todoText.includes(searchText);
-    })
+    }
+  );
   console.log("BUSQUEDA === ", searchedTodos);
+
+  const saveTodos = (newTodos) => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
+
+    setTodos(newTodos);
+  };
 
   const completeTodo = (text) => {
     const newTodos = [...todos];
@@ -69,7 +77,7 @@ function App() {
       (todo) => todo.text === text
     );
     newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   const deleteTodo = (text) => {
@@ -78,9 +86,8 @@ function App() {
       (todo) => todo.text === text
     );
     newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
-  }
-
+    saveTodos(newTodos);
+  };
 
   return (
     <>
@@ -99,8 +106,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
-            done={() => completeTodo(todo.text)}
-            delete={() => deleteTodo(todo.text)}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
