@@ -41,8 +41,24 @@ function App() {
   const completedTodos = todos.filter((todo) => !!todo.completed).length;
   const totalTodos = todos.length;
 
-  console.log("completados==", completedTodos)
-  console.log("Los usuarios buscan 'todos' de ", searchValue)
+  // console.log("completados==", completedTodos)
+  // console.log("Los usuarios buscan 'todos' de ", searchValue)
+
+  console.log("== Log 1 ==");
+  
+/* React.useEffect(() => {
+  console.log(">> Log 2 <<");
+}); */
+
+/* React.useEffect(() => {
+  console.log(">> Log 2 <<");
+}, []); */
+
+React.useEffect(() => {
+  console.log(">> Log 2 <<");
+}, [totalTodos]);
+
+  console.log("== Log 3 ==");
 
 
   const searchedTodos = todos.filter(
@@ -52,7 +68,7 @@ function App() {
       return todoText.includes(searchText);
     }
   );
-  console.log("BUSQUEDA === ", searchedTodos);
+  // console.log("BUSQUEDA === ", searchedTodos);
 
   const completeTodo = (text) => {
     const newTodos = [...todos];
