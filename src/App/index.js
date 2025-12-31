@@ -33,33 +33,18 @@ localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
 // custom hook
 
 function App() {
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error,
+  } = useLocalStorage('TODOS_V1', []);
+  const [searchValue, setSearchValue] = React.useState('');
 
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
-  const [searchValue, setSearchValue] = React.useState("");
-
-  // estado derivado
-  const completedTodos = todos.filter((todo) => !!todo.completed).length;
+  const completedTodos = todos.filter(
+    todo => !!todo.completed
+  ).length;
   const totalTodos = todos.length;
-
-  // console.log("completados==", completedTodos)
-  // console.log("Los usuarios buscan 'todos' de ", searchValue)
-
-  console.log("== Log 1 ==");
-  
-/* React.useEffect(() => {
-  console.log(">> Log 2 <<");
-}); */
-
-/* React.useEffect(() => {
-  console.log(">> Log 2 <<");
-}, []); */
-
-React.useEffect(() => {
-  console.log(">> Log 2 <<");
-}, [totalTodos]);
-
-  console.log("== Log 3 ==");
-
 
   const searchedTodos = todos.filter(
     (todo) => {
@@ -68,7 +53,6 @@ React.useEffect(() => {
       return todoText.includes(searchText);
     }
   );
-  // console.log("BUSQUEDA === ", searchedTodos);
 
   const completeTodo = (text) => {
     const newTodos = [...todos];
@@ -90,6 +74,8 @@ React.useEffect(() => {
 
   return (
     <AppUI
+      loading={loading}
+      error={error}
       completedTodos={completedTodos}
       totalTodos={totalTodos}
       searchValue={searchValue}
