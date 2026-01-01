@@ -26,7 +26,7 @@ function useLocalStorage(itemName, initialValue) {
                 setError(true);
             }
         }, 2000);
-    }, []);
+    });
 
     const saveItem = (newItem) => {
         localStorage.setItem(itemName, JSON.stringify(newItem));
@@ -42,3 +42,32 @@ function useLocalStorage(itemName, initialValue) {
 }
 
 export { useLocalStorage };
+
+
+/* const defaultTodos = [
+    {
+        text: "Hacer ejercicio",
+        completed: false
+    },
+    {
+        text: "Leer un libro",
+        completed: false
+    },
+    {
+        text: "Orar",
+        completed: true
+    },
+    {
+        text: "Mercar",
+        completed: false
+    },
+    {
+        text: "Orar por todos",
+        completed: true
+    },
+]
+localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+ */
+
+// localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+// localStorage.removeItem('TODOS_V1');
