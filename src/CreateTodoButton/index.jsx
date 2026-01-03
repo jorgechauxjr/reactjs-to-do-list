@@ -1,39 +1,16 @@
-import './CreateTodoButton.css'
+import './CreateTodoButton.css';
 
-function CreateTodoButton() {
-    function handleClick(event) {
-        console.log("DISTE CLICK!")
-        console.log("====> evento ", event)
-        console.log("====> target ", event.target)
-    }
-
-    return (
-        <button
-            className="CreateTodoButton"
-            onClick={handleClick}
-        >+</button>
-    );
-}
-
-export { CreateTodoButton };
-
-/*
-
-== ESTILO ARROW FUNCTION ==
-
-function CreateTodoButon() {
-
+function CreateTodoButton({ setOpenModal }) {
     return (
         <button
             className="CreateTodoButton"
             onClick={
-                (event) => {
-                    console.log("DISTE CLICK!")
-                    console.log("====> evento ", event)
-                    console.log("====> target ", event.target)
+                () => {
+                    setOpenModal(state => !state);
                 }
             }
         >+</button>
     );
 }
-*/
+
+export { CreateTodoButton };
