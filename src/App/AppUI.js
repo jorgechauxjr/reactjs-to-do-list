@@ -55,7 +55,7 @@ function AppUI() {
 
             {openModal && (
                 <Modal>
-                    {/* La funcionalidad de agregar TODO */}
+                    {/* La funcionalidad de agregar TO-DO */}
                     <TodoForm />
                 </Modal>
             )}
